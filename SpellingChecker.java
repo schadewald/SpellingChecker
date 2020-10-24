@@ -1,10 +1,37 @@
-public class SpellingChecker 
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+
+public class SpellingChecker extends Application
 {
+    private int count = 0;
+
+    @Override
+    public void start(Stage primaryStage) 
+    {
+        Button btn = new Button();
+        btn.setText("Say 'Hello World'");
+        btn.setOnAction(new EventHandler<ActionEvent>() 
+        {
+            @Override
+            public void handle(ActionEvent event) 
+            {
+                System.out.println("Hello World");   
+            }
+        });
+        StackPane root = new StackPane();
+        root.getChildren().add(btn);
+        Scene scene = new Scene(root, 300, 250);
+        primaryStage.setTitle("Hello World!");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
     public static void main(String[] args) 
     {
-        System.out.println("");
-        System.out.println("Testing .bat file implementation.");
-        System.out.println("");
-        System.out.println("");
+        launch(args);
     }
 }
