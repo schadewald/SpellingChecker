@@ -1,0 +1,2 @@
+javac SpellingChecker.java
+java SpellingChecker
