@@ -4,10 +4,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.TextArea;
 import javafx.stage.FileChooser;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -16,28 +13,52 @@ public class Controller implements Initializable
     @FXML
     private MenuBar menuBar;
     public TextArea textArea;
+
+    private String readFile(File file)
+    {
+        StringBuilder stringBuilder = new StringBuilder();
+        BufferedReader bufferedReader = null;
+        try
+        {
+            bufferedReader = new BufferedReader(new FileReader(file));
+            String text;
+            while ((text = bufferedReader.readLine()) != null)
+            {
+                stringBuilder.append(text);
+                stringBuilder.append("\n");
+            }
+        }
+        catch (IOException e)
+        { e.printStackTrace(); }
+        finally
+        {
+            try
+            { bufferedReader.close(); }
+            catch (IOException e)
+            { e.printStackTrace(); }
+        }
+        return stringBuilder.toString();
+    }
     public void openFile(ActionEvent event)
     {
         System.out.println("Open File Clicked");
         FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+        fileChooser.getExtensionFilters().add(extensionFilter);
         fileChooser.setInitialDirectory(new File("."));
         File file = fileChooser.showOpenDialog(null);
         if(file != null)
-            System.out.println(file.getPath());
+            textArea.setText(readFile(file));
     }
     public void saveFile(ActionEvent event) throws FileNotFoundException {
         try (PrintWriter out = new PrintWriter("SpellCheckerFile.txt");)
         {
             out.println(textArea.getText());
         }
-        System.out.println("Save File Clicked");
-        System.out.println(textArea.getText());
-
-//        FileWriter fw = new FileWriter()
     }
     public void exitFile(ActionEvent event)
     {
-        System.out.println("Exit File Clicked");
+        textArea.clear();
     }
     public void spellCheck(ActionEvent event)
     {

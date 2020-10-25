@@ -9,7 +9,7 @@ public class Main extends Application
     @Override
     public void start(Stage primaryStage) throws Exception //TODO:: add catch
     {
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("menu.fxml"));
         primaryStage.setTitle("Welcome to Spelling Checker!");
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
