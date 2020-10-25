@@ -1,8 +1,26 @@
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.GridPane?>
-
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<GridPane fx:controller="Controller"
-          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
-</GridPane>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<BorderPane fx:controller="Controller"
+            xmlns:fx="http://javafx.com/fxml/1">
+    <top>
+        <MenuBar fx:id="menuBar" focusTraversable="true">
+            <menus>
+                <Menu text="File">
+                    <items>
+                        <MenuItem text="Open" onAction="#openFile"/>
+                        <MenuItem text="Save"/>
+                        <MenuItem text="Exit"/>
+                    </items>
+                </Menu>
+                <Menu text="Edit">
+                    <items>
+                        <MenuItem text="Spell Check"/>
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+</BorderPane>
