@@ -5,7 +5,8 @@ import javafx.scene.control.TextArea;
 import javafx.stage.FileChooser;
 import java.io.*;
 import java.net.URL;
-import java.util.ResourceBundle;
+import java.util.*;
+
 /**
  * Chad Schadewald
  * Controller.java
@@ -79,6 +80,20 @@ public class Controller implements Initializable
     }
     public void spellCheck(ActionEvent event)
     {
+        if (textArea.getText().equals(""))
+        {
+            System.out.println("Blank Input."); //TODO: add action
+        }
+        List<String> words;
+        String regex = "[!._,'@? \n]";
+        String[] splitString = textArea.getText().split(regex);
+        words = new ArrayList<>(Arrays.asList(splitString));
+        words.removeAll(Arrays.asList("", null));
+        for (String word: words)
+        {
+            System.out.println(word);
+        }
+        System.out.println(words.size());
         System.out.println("Spell Check Clicked");
     }
     @Override

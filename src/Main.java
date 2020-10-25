@@ -16,7 +16,7 @@ import java.util.Hashtable;
 public class Main extends Application
 {
     @Override
-    public void start(Stage primaryStage) throws Exception //TODO:: add catch
+    public void start(Stage primaryStage) throws Exception
     {
         Parent root = FXMLLoader.load(getClass().getResource("menu.fxml"));
         primaryStage.setTitle("Welcome to Spelling Checker!");
