@@ -1,12 +1,12 @@
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.TextArea;
 import javafx.stage.FileChooser;
 import java.io.*;
 import java.net.URL;
 import java.util.*;
-
 /**
  * Chad Schadewald
  * Controller.java
@@ -16,6 +16,7 @@ public class Controller implements Initializable
 {
     public MenuBar menuBar;
     public TextArea textArea;
+    private Hashtable<Integer, String> hashtable = new Hashtable<Integer, String>();
 
     private String readFile(File file)
     {
@@ -53,6 +54,15 @@ public class Controller implements Initializable
         catch (FileNotFoundException e)
         { e.printStackTrace(); }
     }
+    private void hashtableBuilder() throws IOException
+    {
+        BufferedReader bufferedReader = new BufferedReader(new FileReader("Words.txt"));
+        String line;
+        while ((line = bufferedReader.readLine()) != null)
+        {
+            hashtable.put(line.hashCode(), line);
+        }
+    }
     public void openFile(ActionEvent event)
     {
         FileChooser fileChooser = new FileChooser();
@@ -78,23 +88,39 @@ public class Controller implements Initializable
     {
         textArea.clear();
     }
-    public void spellCheck(ActionEvent event)
+    public void spellCheck(ActionEvent event) throws IOException
     {
         if (textArea.getText().equals(""))
         {
-            System.out.println("Blank Input."); //TODO: add action
+            Alert blankInput = new Alert(Alert.AlertType.ERROR);
+            blankInput.setContentText("Nothing To Spell Check!");
+            blankInput.setTitle("Blank Input");
+            blankInput.show();
         }
+        hashtableBuilder();
         List<String> words;
         String regex = "[!._,'@? \n]";
         String[] splitString = textArea.getText().split(regex);
         words = new ArrayList<>(Arrays.asList(splitString));
         words.removeAll(Arrays.asList("", null));
+        String textAreaReturn = "";
         for (String word: words)
         {
-            System.out.println(word);
+            textAreaReturn = textAreaReturn.concat(word + " ");
         }
-        System.out.println(words.size());
-        System.out.println("Spell Check Clicked");
+        textArea.setText(textAreaReturn);
+        Alert misspelledAlert = new Alert(Alert.AlertType.ERROR);
+        for (String word: words)
+        {
+            word = word.toLowerCase();
+            int stringHash = word.hashCode();
+            if (hashtable.get(stringHash) == null)
+            {
+                misspelledAlert.setContentText("\"" + word + "\" is misspelled.");
+                misspelledAlert.setTitle("Misspelled Word!");
+                misspelledAlert.showAndWait();
+            }
+        }
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
