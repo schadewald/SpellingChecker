@@ -54,7 +54,6 @@ public class Controller implements Initializable
     }
     public void openFile(ActionEvent event)
     {
-        System.out.println("Open File Clicked");
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
         fileChooser.getExtensionFilters().add(extensionFilter);
