@@ -1,5 +1,4 @@
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.TextArea;
@@ -42,6 +41,17 @@ public class Controller implements Initializable
         }
         return stringBuilder.toString();
     }
+    private void saveTextToFile(String content, File file)
+    {
+        try
+        {
+            PrintWriter out = new PrintWriter(file);
+            out.println(content);
+            out.close();
+        }
+        catch (FileNotFoundException e)
+        { e.printStackTrace(); }
+    }
     public void openFile(ActionEvent event)
     {
         System.out.println("Open File Clicked");
@@ -53,10 +63,15 @@ public class Controller implements Initializable
         if(file != null)
             textArea.setText(readFile(file));
     }
-    public void saveFile(ActionEvent event) throws FileNotFoundException {
-        try (PrintWriter out = new PrintWriter("SpellCheckerFile.txt");)
+    public void saveFile(ActionEvent event) throws FileNotFoundException
+    {
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+        fileChooser.getExtensionFilters().add(extensionFilter);
+        File file = fileChooser.showSaveDialog(null);
+        if (file != null)
         {
-            out.println(textArea.getText());
+            saveTextToFile(textArea.getText(), file);
         }
     }
     public void exitFile(ActionEvent event)

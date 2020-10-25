@@ -20,7 +20,7 @@ public class Main extends Application
     {
         Parent root = FXMLLoader.load(getClass().getResource("menu.fxml"));
         primaryStage.setTitle("Welcome to Spelling Checker!");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setScene(new Scene(root, 400, 375));
         primaryStage.show();
     }
     public static void main(String[] args) throws IOException {
