@@ -5,7 +5,9 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.TextArea;
 import javafx.stage.FileChooser;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -23,9 +25,14 @@ public class Controller implements Initializable
         if(file != null)
             System.out.println(file.getPath());
     }
-    public void saveFile(ActionEvent event)
-    {
+    public void saveFile(ActionEvent event) throws FileNotFoundException {
+        try (PrintWriter out = new PrintWriter("SpellCheckerFile.txt");)
+        {
+            out.println(textArea.getText());
+        }
         System.out.println("Save File Clicked");
+        System.out.println(textArea.getText());
+
 //        FileWriter fw = new FileWriter()
     }
     public void exitFile(ActionEvent event)
