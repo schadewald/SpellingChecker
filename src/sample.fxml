@@ -1,7 +1,4 @@
-<?import java.net.*?>
-<?import javafx.geometry.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <BorderPane fx:controller="Controller"
             xmlns:fx="http://javafx.com/fxml/1">
@@ -11,16 +8,21 @@
                 <Menu text="File">
                     <items>
                         <MenuItem text="Open" onAction="#openFile"/>
-                        <MenuItem text="Save"/>
-                        <MenuItem text="Exit"/>
+                        <MenuItem text="Save" onAction="#saveFile"/>
+                        <MenuItem text="Exit" onAction="#exitFile"/>
                     </items>
                 </Menu>
                 <Menu text="Edit">
                     <items>
-                        <MenuItem text="Spell Check"/>
+                        <MenuItem text="Spell Check" onAction="#spellCheck"/>
                     </items>
                 </Menu>
             </menus>
         </MenuBar>
     </top>
+    <center>
+        <TextArea fx:id="textArea">
+
+        </TextArea>
+    </center>
 </BorderPane>
