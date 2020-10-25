@@ -7,11 +7,14 @@ import javafx.stage.FileChooser;
 import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
-
+/**
+ * Chad Schadewald
+ * Controller.java
+ * Project 2
+ */
 public class Controller implements Initializable
 {
-    @FXML
-    private MenuBar menuBar;
+    public MenuBar menuBar;
     public TextArea textArea;
 
     private String readFile(File file)
